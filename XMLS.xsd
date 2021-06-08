@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="wpf"
+    targetNamespace="wpf"
+    attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:wpf="wpf"
+>
+  <xs:complexType name="CircleListType">
+    <xs:sequence>
+      <xs:element name="Circle" type="wpf:CircleType" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="CircleType">
+    <xs:sequence>
+      <xs:element name="radius" type="xs:unsignedInt" minOccurs="1" />
+      <xs:element name="frequency" type="xs:double" minOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <!--root-->
+  <xs:element name="CircleList" type="wpf:CircleListType" />
+</xs:schema>

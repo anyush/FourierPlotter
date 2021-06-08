@@ -1,0 +1,58 @@
+﻿<Window x:Class="WPF2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF2"
+        mc:Ignorable="d"
+        Title="MainWindow" WindowState="Maximized" WindowStyle="None"
+        ResizeMode="NoResize">
+    <DockPanel Grid.ColumnSpan="2">
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_File">
+                <MenuItem Header="_New" Click="New_Click" />
+                <MenuItem Header="_Open" Click="Open_Click" />
+                <MenuItem Header="_Save" Click="Save_Click" />
+            </MenuItem>
+            <MenuItem Header="_Exit" Click="Exit_Click" />
+            <MenuItem Header="_Options">
+                <MenuItem Header="_Draw circles" x:Name="drCircChk" Click="OptChngd_Click" IsCheckable="True" IsChecked="True" />
+                <MenuItem Header="_Draw lines" x:Name="drLnChk" Click="OptChngd_Click" IsCheckable="True" IsChecked="True" />
+            </MenuItem>
+        </Menu>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="85*" />
+                <RowDefinition Height="15*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="11*" />
+                <ColumnDefinition Width="784*"/>
+                <ColumnDefinition Width="199*"/>
+            </Grid.ColumnDefinitions>
+
+            <GroupBox x:Name="GBImg" Header="Plotter" Grid.ColumnSpan="2">
+                <Image x:Name="Img" />
+            </GroupBox>
+            <GroupBox Header="Circles" Grid.Column="2">
+                <DataGrid x:Name="DGrid" ItemsSource="{Binding instances}" AutoGenerateColumns="False"
+                          Binding.SourceUpdated="DGrid_SourceUpdated" HeadersVisibility="Column"
+                          KeyUp="DGrid_KeyUp">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Radius" Binding="{Binding Radius, Mode=TwoWay, NotifyOnSourceUpdated=True}" />
+                        <DataGridTextColumn Header="Frequency" Binding="{Binding Frequency, Mode=TwoWay, NotifyOnSourceUpdated=True}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
+            <ProgressBar x:Name="ProgBar" Grid.Row="1" Height="30" Margin="10,34" Minimum="0" Maximum="1000" Grid.ColumnSpan="2" />
+            <GroupBox Header="Actions" Grid.Row="1" Grid.Column="2">
+                <StackPanel>
+                    <Button x:Name="StartButton" Content="Start" Click="StartButton_Click" />
+                    <Button x:Name="PauseButton" Content="Pause" Click="PauseButton_Click" />
+                    <Button x:Name="ResetButton" Content="Reset" Click="ResetButton_Click" />
+                </StackPanel>
+            </GroupBox>
+        </Grid>
+    </DockPanel>
+
+</Window>
